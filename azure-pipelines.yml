@@ -8,6 +8,8 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
+  script:
+      - echo "Ajusting this pipeline with stages & jobs"
 
 steps:
 - task: Maven@3
@@ -21,33 +23,3 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-
-stages:
-    - build
-    - test
-
-variables:
-    BUILD_FILE_NAME: laptop.txt
-
-build laptop:
-    image: alpine
-    stage: build
-    script:
-        - echo "Building a laptop in the new DevOps group"
-        - mkdir build
-        - touch build/computer.txt
-        - echo "Mainboard" >> build/$BUILD_FILE_NAME
-        - cat build/$BUILD_FILE_NAME
-        - echo "Keyboard" >> build/$BUILD_FILE_NAME
-        - cat build/$BUILD_FILE_NAME
-    artifacts:
-        paths:
-            - build
-            
-test laptop:
-    image: alpine
-    stage: test
-    script:
-        - test -f build/$BUILD_FILE_NAME
-        - grep "Mainboard" build/$BUILD_FILE_NAME
-        - grep "Keyboard" build/$BUILD_FILE_NAME
