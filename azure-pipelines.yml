@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
   script:
-      - echo "Ajusting this pipeline with stages & jobs"
+      - echo "Ajusting this pipeline for the Java application"
 
 steps:
 - task: Maven@3
